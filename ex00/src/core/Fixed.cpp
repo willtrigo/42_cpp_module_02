@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:50:57 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/08 20:02:03 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/08 20:23:51 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils/TerminalColor.hpp"
 #include <iostream>
 
-Fixed::Fixed() : m_raw(0), m_color(TerminalColor::getInstance()), m_str_color(WHITE), m_bg_color(BG_RESET)  {
+Fixed::Fixed() : m_raw(RAW_DEFAULT), m_color(TerminalColor::getInstance()), m_str_color(WHITE), m_bg_color(BG_RESET)  {
   std::cout << this->m_color.setColor(this->m_bg_color, this->m_str_color, "Default constructor called") << std::endl;
 }
 

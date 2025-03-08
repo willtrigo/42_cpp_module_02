@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:50:54 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/08 19:48:09 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/08 20:23:43 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ class Fixed {
   void setRawBits(int const raw);
 
  private:
+  enum defaultEnum {
+    RAW_DEFAULT
+  };
   int m_raw;
   static const int m_fractionalBits = 8;
   const TerminalColor& m_color;
