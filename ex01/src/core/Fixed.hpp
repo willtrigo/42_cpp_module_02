@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 21:49:22 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/09 14:55:19 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:03:34 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include "utils/TerminalColor.hpp"
 #include <iostream>
-#include <cmath>
 
 class Fixed {
  public:
@@ -23,22 +22,26 @@ class Fixed {
   Fixed(const int value);
   Fixed(const float value);
   Fixed(const Fixed& other);
-  Fixed& operator=(const Fixed& other);
-  friend std::ostream &operator<<(std::ostream& os, const Fixed& fixed);
   ~Fixed();
 
+  Fixed& operator=(const Fixed& other);
+
   int getRawBits() const;
-  void setRawBits(int const raw);
-  float toFloat() const;
   int toInt() const;
+  float toFloat() const;
+  void setRawBits(int const raw);
+
+  friend std::ostream &operator<<(std::ostream& os, const Fixed& fixed);
 
  private:
   enum defaultEnum {
-    RAW_DEFAULT,
+    VALUE_DEFAULT,
     BIT_SHIFT
   };
-  int m_raw;
+
   static const int m_fractionalBits = 8;
+
+  int m_value;
   const TerminalColor& m_color;
   ColorCode m_strColor;
   ColorCode m_bgColor;
