@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 21:49:26 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/09 20:15:11 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:26:36 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void Fixed::setRawBits(int const raw) {
   this->m_value = raw;
 }
 
-std::ostream &operator<<(std::ostream& os, const Fixed& fixed) {
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed) {
   os << fixed.toFloat();
   return os;
 }

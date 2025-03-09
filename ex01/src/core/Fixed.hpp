@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 21:49:22 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/09 20:03:34 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:26:26 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class Fixed {
   float toFloat() const;
   void setRawBits(int const raw);
 
-  friend std::ostream &operator<<(std::ostream& os, const Fixed& fixed);
+  friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 
  private:
   enum defaultEnum {
