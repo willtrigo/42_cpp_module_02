@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:50:57 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/09 19:22:29 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:05:46 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ Fixed::Fixed(Fixed const& other) : m_color(TerminalColor::getInstance()) {
   this->m_bgColor = BG_RESET;
 }
 
+Fixed::~Fixed() {
+  std::cout << this->m_color.setColor(this->m_bgColor, this->m_strColor, "Destructor called") << std::endl;
+}
+
 Fixed& Fixed::operator=(const Fixed& other) {
   if (this != &other) {
     std::cout << this->m_color.setColor(BG_RESET, ORANGE, "Copy assignment operator called") << std::endl;
@@ -33,10 +37,6 @@ Fixed& Fixed::operator=(const Fixed& other) {
     this->m_value = other.getRawBits();
   }
   return *this;
-}
-
-Fixed::~Fixed() {
-  std::cout << this->m_color.setColor(this->m_bgColor, this->m_strColor, "Destructor called") << std::endl;
 }
 
 int Fixed::getRawBits() const {
