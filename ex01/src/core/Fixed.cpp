@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 21:49:26 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/09 20:26:36 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/09 21:04:50 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@ Fixed::Fixed() : m_value(VALUE_DEFAULT), m_color(TerminalColor::getInstance()), 
   std::cout << this->m_color.setColor(this->m_bgColor, this->m_strColor, "Default constructor called") << std::endl;
 }
 
-Fixed::Fixed(const int value) : m_color(TerminalColor::getInstance()), m_strColor(YELLOW), m_bgColor(BG_RESET) {
-  this->m_value = value << this->m_fractionalBits;
+Fixed::Fixed(const int value) : m_value(value << this->m_fractionalBits), m_color(TerminalColor::getInstance()), m_strColor(YELLOW), m_bgColor(BG_RESET) {
   std::cout << this->m_color.setColor(this->m_bgColor, this->m_strColor, "Int constructor called") << std::endl;
 }
 
-Fixed::Fixed(const float value) : m_color(TerminalColor::getInstance()), m_strColor(RED), m_bgColor(BG_RESET) {
-  this->m_value = roundf(value * (BIT_SHIFT << this->m_fractionalBits));
+Fixed::Fixed(const float value) : m_value(roundf(value * (BIT_SHIFT << this->m_fractionalBits))), m_color(TerminalColor::getInstance()), m_strColor(RED), m_bgColor(BG_RESET) {
   std::cout << this->m_color.setColor(this->m_bgColor, this->m_strColor, "Float constructor called") << std::endl;
 }
 
