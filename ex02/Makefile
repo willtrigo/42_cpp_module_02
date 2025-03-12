@@ -6,7 +6,7 @@
 #    By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/09 15:17:34 by dande-je          #+#    #+#              #
-#    Updated: 2025/03/12 03:51:44 by dande-je         ###   ########.fr        #
+#    Updated: 2025/03/12 04:48:42 by dande-je         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -215,14 +215,14 @@ $(BUILD_DIR)%.o: %.cpp
 $(NAME): $(call reset_count, -$(words $(OBJS))) $(OBJS)
 	$(call comp_exe)
 
-googletest:
+$(TEST_LIBS):
 	$(call submodule_update_googletest)
 
 $(BUILD_TEST_DIR)%.o: %.cpp
 	$(call create_dir)
 	$(COMPILE_OBJS_TEST)
 
-test: test_fclean $(GOOGLETEST) $(call reset_count, -$(words $(OBJS))) $(OBJS) $(TEST_OBJS)
+test: test_fclean $(TEST_LIBS) $(call reset_count, -$(words $(OBJS))) $(OBJS) $(TEST_OBJS)
 	$(call comp_test)
 
 test_fclean:
