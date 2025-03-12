@@ -6,9 +6,15 @@
 #    By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/09 15:17:34 by dande-je          #+#    #+#              #
-#    Updated: 2025/03/11 23:44:29 by dande-je         ###   ########.fr        #
+#    Updated: 2025/03/12 03:51:44 by dande-je         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#******************************************************************************#
+#                                REQUIREMENTS                                  #
+#******************************************************************************#
+
+GOOGLETEST_VERSION              := 1.8.1
 
 #******************************************************************************#
 #                                   COLOR                                      #
@@ -31,6 +37,13 @@ SRCS_CORE_DIR                   := $(SRCS_DIR)core/
 INCS                            := src/
 BIN_DIR                         := bin/
 BUILD_DIR                       := build/
+TEST_DIR                        := test/
+BIN_TEST_DIR                    := $(TEST_DIR)bin/
+BUILD_TEST_DIR                  := $(TEST_DIR)build/
+GOOGLETEST_DIR                  := $(TEST_DIR)extern/googletest/
+GOOGLETEST_BUILD_DIR            := $(GOOGLETEST_DIR)build/
+GOOGLETEST_INCS                 := $(GOOGLETEST_DIR)googletest/include/
+GOOGLETEST_LIBS                 := $(GOOGLETEST_BUILD_DIR)googlemock/gtest/
 
 #******************************************************************************#
 #                                  COMMANDS                                    #
@@ -45,6 +58,9 @@ SLEEP                           := sleep 0.01
 #                                   FILES                                      #
 #******************************************************************************#
 
+TEST_LIBS                       := $(GOOGLETEST_LIBS)libgtest.a \
+                                   $(GOOGLETEST_LIBS)libgtest_main.a
+
 NAME_OUTPUT                     = fixed
 NAME                            = $(BIN_DIR)$(NAME_OUTPUT)
 
@@ -54,6 +70,13 @@ SRCS_FILES                      += $(addprefix $(SRCS_CORE_DIR), FixedAritmetic.
 								   FixedUtility.cpp)
 
 OBJS                            += $(SRCS_FILES:%.cpp=$(BUILD_DIR)%.o)
+
+TEST_OUTPUT                     = test_fixed
+TEST_NAME                       = $(BIN_TEST_DIR)$(TEST_OUTPUT)
+
+TEST_FILES                      += $(addprefix $(TEST_DIR), test_fixed.cpp)
+
+TEST_OBJS                       += $(TEST_FILES:%.cpp=$(BUILD_TEST_DIR)%.o)
 
 DEPS                            += $(OBJS:.o=.d)
 
@@ -66,7 +89,9 @@ OBJS_COUNT                      = 0
 MATH                            = 0
 CLEAN_MESSAGE                   := $(NAME_OUTPUT) objects deleted
 FCLEAN_MESSAGE                  := $(NAME_OUTPUT) deleted
+FCLEAN_TEST_MESSAGE             := $(TEST_OUTPUT) deleted
 EXE_MESSAGE                     = $(RESET)[100%%] $(GREEN)Built target $(NAME_OUTPUT)
+TEST_EXE_MESSAGE                = $(RESET)[100%%] $(GREEN)Built target $(TEST_OUTPUT)
 COMP_MESSAGE                    = Building CPP object
 
 #******************************************************************************#
@@ -80,6 +105,12 @@ DFLAGS                         := -Wall -Wextra -Werror -g3 -std=c++98
 LFLAGS                         := -march=native
 COMPILE_OBJS                   = $(CC) $(CFLAGS) $(LFLAGS) $(CPPFLAGS) -c $< -o $@
 COMPILE_EXE                    = $(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+TEST_CFLAGS                    = -std=c++98
+TEST_CPPFLAGS                  := $(addprefix -I,$(GOOGLETEST_INCS)) $(addprefix -I,$(INCS))
+TEST_LFLAGS                    := -L$(GOOGLETEST_LIBS) -lgtest -lgtest_main -pthread
+TEST_CPPFLAGS                  := $(addprefix -I,$(GOOGLETEST_INCS)) $(addprefix -I,$(INCS))
+COMPILE_OBJS_TEST              = $(CC) $(TEST_CFLAGS) $(TEST_CPPFLAGS) -c $< -o $@
+COMPILE_TEST_EXE               = $(CC) $(TEST_CFLAGS) $(TEST_OBJS) $(filter-out $(BUILD_DIR)$(SRCS_MAIN_DIR)main.o, $(OBJS)) -o $(TEST_NAME) $(TEST_LFLAGS)
 
 #******************************************************************************#
 #                                   DEFINE                                     #
@@ -97,6 +128,22 @@ define create_dir
 	$(MKDIR) $(dir $@)
 endef
 
+define submodule_update_googletest
+	# $(RM) $(GOOGLETEST_DIR)
+	printf "$(PURPLE)Building library googletest $(GOOGLETEST_VERSION)\n$(RESET)"
+	git submodule update --init --recursive >/dev/null 2>&1 || true
+	git submodule foreach -q --recursive \
+		'branch="$(git config -f $toplevel/.gitmodules submodule.googletest)"; \
+		git pull origin main; \
+		git fetch; \
+		git checkout release-$(GOOGLETEST_VERSION)' \
+		>/dev/null 2>&1 || true
+	$(SLEEP)
+	$(MKDIR) $(GOOGLETEST_BUILD_DIR) >/dev/null 2>&1 || true
+	cd $(GOOGLETEST_BUILD_DIR) && cmake -DCMAKE_CXX_FLAGS="-std=c++98 -w" .. && make
+	$(SLEEP)
+endef
+
 define comp_objs
 	$(eval COUNT=$(shell expr $(COUNT) + 1))
 	$(COMPILE_OBJS)
@@ -112,6 +159,14 @@ define comp_exe
 	printf "$(EXE_MESSAGE)\n$(RESET)"
 endef
 
+define comp_test
+	$(MKDIR) $(BIN_TEST_DIR)
+	$(COMPILE_TEST_EXE)
+	$(SLEEP)
+	printf "$(TEST_EXE_MESSAGE)\n$(RESET)"
+	./$(TEST_NAME)
+endef
+
 define clean
 	$(RM) $(BUILD_DIR)
 	$(SLEEP)
@@ -120,8 +175,20 @@ endef
 
 define fclean
 	$(RM) $(BIN_DIR)
+	$(RM) $(BIN_TEST_DIR)
 	$(SLEEP)
 	printf "$(RED)$(FCLEAN_MESSAGE)$(RESET)\n"
+endef
+
+define test_fclean
+	$(RM) $(BIN_DIR)
+	$(RM) $(BUILD_DIR)
+	printf "$(RED)$(CLEAN_MESSAGE)$(RESET)\n"
+	printf "$(RED)$(FCLEAN_MESSAGE)$(RESET)\n"
+	$(RM) $(BUILD_TEST_DIR)
+	$(RM) $(BIN_TEST_DIR)
+	$(SLEEP)
+	printf "$(RED)$(FCLEAN_TEST_MESSAGE)$(RESET)\n"
 endef
 
 define debug
@@ -148,6 +215,19 @@ $(BUILD_DIR)%.o: %.cpp
 $(NAME): $(call reset_count, -$(words $(OBJS))) $(OBJS)
 	$(call comp_exe)
 
+googletest:
+	$(call submodule_update_googletest)
+
+$(BUILD_TEST_DIR)%.o: %.cpp
+	$(call create_dir)
+	$(COMPILE_OBJS_TEST)
+
+test: test_fclean $(GOOGLETEST) $(call reset_count, -$(words $(OBJS))) $(OBJS) $(TEST_OBJS)
+	$(call comp_test)
+
+test_fclean:
+	$(call test_fclean)
+
 clean:
 	$(call clean)
 
@@ -159,7 +239,7 @@ re: fclean all
 debug:
 	$(call debug)
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug test googletest test_fclean
 .DEFAULT_GOAL := all
 .SILENT:
 
