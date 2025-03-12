@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 15:21:49 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/09 20:59:50 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/12 02:46:12 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ class Fixed {
  private:
   enum defaultEnum {
     VALUE_DEFAULT,
-    BIT_SHIFT,
-    INCREMENT = 1,
-    DECREMENT = 1
+    BIT_SHIFT
   };
 
   static const int m_fractionalBits = 8;

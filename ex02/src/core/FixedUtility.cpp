@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:30:41 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/11 12:32:34 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/12 03:44:39 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int Fixed::toInt() const {
 }
 
 float Fixed::toFloat() const {
-  return (float)this->m_value / (BIT_SHIFT << this->m_fractionalBits);
+  return static_cast<float>(this->m_value) / (BIT_SHIFT << this->m_fractionalBits);
 }
 
 void Fixed::setRawBits(int const raw) {
