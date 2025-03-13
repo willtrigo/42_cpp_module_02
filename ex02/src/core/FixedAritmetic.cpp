@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:37:41 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/12 04:27:03 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/13 00:21:08 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ bool Fixed::operator==(const Fixed& other) const {
 bool Fixed::operator!=(const Fixed& other) const {
   return this->m_value != other.m_value;
 }
-
 
 Fixed Fixed::operator+(const Fixed& other) const {
     return Fixed(this->toFloat() + other.toFloat());
@@ -73,20 +72,4 @@ Fixed Fixed::operator--(int) {
   Fixed temp(*this);
   --(*this);
   return temp;
-}
-
-Fixed& Fixed::min(Fixed& a, Fixed& b) {
-    return (a < b) ? a : b;
-}
-
-const Fixed& Fixed::min(const Fixed& a, const Fixed& b) {
-    return (a < b) ? a : b;
-}
-
-Fixed& Fixed::max(Fixed& a, Fixed& b) {
-    return (a > b) ? a : b;
-}
-
-const Fixed& Fixed::max(const Fixed& a, const Fixed& b) {
-    return (a > b) ? a : b;
 }

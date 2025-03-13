@@ -6,7 +6,7 @@
 #    By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/09 15:17:34 by dande-je          #+#    #+#              #
-#    Updated: 2025/03/12 04:48:42 by dande-je         ###   ########.fr        #
+#    Updated: 2025/03/13 00:05:20 by dande-je         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,13 @@ INCS                            := src/
 BIN_DIR                         := bin/
 BUILD_DIR                       := build/
 TEST_DIR                        := test/
+TEST_CORE_DIR                   := $(TEST_DIR)core/
+TEST_FIXED_DIR                  := $(TEST_CORE_DIR)fixed/
 BIN_TEST_DIR                    := $(TEST_DIR)bin/
 BUILD_TEST_DIR                  := $(TEST_DIR)build/
 GOOGLETEST_DIR                  := $(TEST_DIR)extern/googletest/
 GOOGLETEST_BUILD_DIR            := $(GOOGLETEST_DIR)build/
-GOOGLETEST_INCS                 := $(GOOGLETEST_DIR)googletest/include/
+GOOGLETEST_INCS                 := $(GOOGLETEST_DIR)googletest/include/ $(TEST_DIR)
 GOOGLETEST_LIBS                 := $(GOOGLETEST_BUILD_DIR)googlemock/gtest/
 
 #******************************************************************************#
@@ -59,7 +61,7 @@ SLEEP                           := sleep 0.01
 #******************************************************************************#
 
 TEST_LIBS                       := $(GOOGLETEST_LIBS)libgtest.a \
-                                   $(GOOGLETEST_LIBS)libgtest_main.a
+								   $(GOOGLETEST_LIBS)libgtest_main.a
 
 NAME_OUTPUT                     = fixed
 NAME                            = $(BIN_DIR)$(NAME_OUTPUT)
@@ -74,7 +76,10 @@ OBJS                            += $(SRCS_FILES:%.cpp=$(BUILD_DIR)%.o)
 TEST_OUTPUT                     = test_fixed
 TEST_NAME                       = $(BIN_TEST_DIR)$(TEST_OUTPUT)
 
-TEST_FILES                      += $(addprefix $(TEST_DIR), test_fixed.cpp)
+TEST_FILES                      += $(addprefix $(TEST_DIR), test_main.cpp)
+TEST_FILES                      += $(addprefix $(TEST_FIXED_DIR), test_arithmetic.cpp \
+								   test_constructor.cpp \
+								   test_utility.cpp)
 
 TEST_OBJS                       += $(TEST_FILES:%.cpp=$(BUILD_TEST_DIR)%.o)
 
@@ -108,7 +113,6 @@ COMPILE_EXE                    = $(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 TEST_CFLAGS                    = -std=c++98
 TEST_CPPFLAGS                  := $(addprefix -I,$(GOOGLETEST_INCS)) $(addprefix -I,$(INCS))
 TEST_LFLAGS                    := -L$(GOOGLETEST_LIBS) -lgtest -lgtest_main -pthread
-TEST_CPPFLAGS                  := $(addprefix -I,$(GOOGLETEST_INCS)) $(addprefix -I,$(INCS))
 COMPILE_OBJS_TEST              = $(CC) $(TEST_CFLAGS) $(TEST_CPPFLAGS) -c $< -o $@
 COMPILE_TEST_EXE               = $(CC) $(TEST_CFLAGS) $(TEST_OBJS) $(filter-out $(BUILD_DIR)$(SRCS_MAIN_DIR)main.o, $(OBJS)) -o $(TEST_NAME) $(TEST_LFLAGS)
 
