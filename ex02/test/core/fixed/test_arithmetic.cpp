@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:02:18 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/14 01:32:03 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/14 01:54:44 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ TEST_F(FixedTest, DivisionFloatOperators) {
 TEST_F(FixedTest, DivisionByZeroOperators) {
   EXPECT_EQ((big / zero).toInt(), expecZero);
   EXPECT_EQ((big / zero).toFloat(), expecZero);
+  EXPECT_EQ((zero / big).toInt(), expecZero);
+  EXPECT_EQ((zero / big).toFloat(), expecZero);
 }
 
 TEST_F(FixedTest, LessThanOperators) {
