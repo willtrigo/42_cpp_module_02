@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 21:49:22 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/09 20:26:26 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/14 20:33:35 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ class Fixed {
   float toFloat() const;
   void setRawBits(int const raw);
 
-  friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
-
  private:
   enum defaultEnum {
     VALUE_DEFAULT,
@@ -46,5 +44,7 @@ class Fixed {
   ColorCode m_strColor;
   ColorCode m_bgColor;
 };
+
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 
 #endif // FIXED_HPP
