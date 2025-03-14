@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 21:49:26 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/09 21:19:09 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/13 23:59:28 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Fixed::Fixed()
     : m_value(VALUE_DEFAULT),
       m_color(TerminalColor::getInstance()),
       m_strColor(WHITE),
-      m_bgColor(BG_RESET)  {
+      m_bgColor(BG_RESET) {
   std::cout << this->m_color.setColor(this->m_bgColor, this->m_strColor, "Default constructor called") << std::endl;
 }
 
