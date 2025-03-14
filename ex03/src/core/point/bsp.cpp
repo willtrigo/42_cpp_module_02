@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:20:17 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/14 18:14:12 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:55:36 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 static Fixed crossProduct(Point const point, Point const vertexA, Point const vertexB);
 
 bool bsp(Point const a, Point const b, Point const c, Point const point) {
-  Fixed vertex1 = crossProduct(point, a, b);
-  Fixed vertex2 = crossProduct(point, b, c);
-  Fixed vertex3 = crossProduct(point, c, a);
+  Fixed product1 = crossProduct(point, a, b);
+  Fixed product2 = crossProduct(point, b, c);
+  Fixed product3 = crossProduct(point, c, a);
 
-  if (vertex1 == 0 || vertex2 == 0 || vertex3 == 0) {
+  if (product1 == 0 || product2 == 0 || product3 == 0) {
     return false;
   }
 
-  bool all_positive = (vertex1 > 0) && (vertex2 > 0) && (vertex3 > 0);
-  bool all_negative = (vertex1 < 0) && (vertex2 < 0) && (vertex3 < 0);
+  bool all_positive = (product1 > 0) && (product2 > 0) && (product3 > 0);
+  bool all_negative = (product1 < 0) && (product2 < 0) && (product3 < 0);
   return all_positive || all_negative;
 }
 
