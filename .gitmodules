@@ -1,3 +1,6 @@
 [submodule "ex02/test/extern/googletest"]
 	path = ex02/test/extern/googletest
 	url = git@github.com:google/googletest.git
+[submodule "ex03/test/extern/googletest"]
+	path = ex03/test/extern/googletest
+	url = https://github.com/google/googletest.git
