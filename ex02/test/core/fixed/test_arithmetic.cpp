@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:02:18 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/14 01:54:44 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/14 02:09:10 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 TEST_F(FixedTest, AdditionIntOperators) {
   EXPECT_EQ((mid + big).toInt(), expecMid + expecBig);
-  EXPECT_EQ((mid + bigf).toInt(), static_cast<int>(round(static_cast<float>(expecMid) + expecBigf)));
-  EXPECT_EQ((midf + bigf).toInt(), static_cast<int>(round(expecMidf + expecBigf)));
+  EXPECT_EQ((mid + bigf).toInt(), static_cast<int>(roundf(static_cast<float>(expecMid) + expecBigf)));
+  EXPECT_EQ((midf + bigf).toInt(), static_cast<int>(roundf(expecMidf + expecBigf)));
   EXPECT_EQ((mid + big + mid).toInt(), expecMid + expecBig + expecMid);
-  EXPECT_EQ((midf + bigf + midf).toInt(), static_cast<int>(round(expecMidf + expecBigf + expecMidf)));
+  EXPECT_EQ((midf + bigf + midf).toInt(), static_cast<int>(roundf(expecMidf + expecBigf + expecMidf)));
 }
 
 TEST_F(FixedTest, AdditionFloatOperators) {
@@ -32,10 +32,10 @@ TEST_F(FixedTest, AdditionFloatOperators) {
 
 TEST_F(FixedTest, SubtractionIntOperators) {
   EXPECT_EQ((mid - big).toInt(), expecMid - expecBig);
-  EXPECT_EQ((mid - bigf).toInt(), static_cast<int>(round(static_cast<float>(expecMid) - expecBigf)));
-  EXPECT_EQ((midf - bigf).toInt(), static_cast<int>(round(expecMidf - expecBigf)));
+  EXPECT_EQ((mid - bigf).toInt(), static_cast<int>(roundf(static_cast<float>(expecMid) - expecBigf)));
+  EXPECT_EQ((midf - bigf).toInt(), static_cast<int>(roundf(expecMidf - expecBigf)));
   EXPECT_EQ((mid - big - mid).toInt(), expecMid - expecBig - expecMid);
-  EXPECT_EQ((midf - bigf - midf).toInt(), static_cast<int>(round(expecMidf - expecBigf - expecMidf)));
+  EXPECT_EQ((midf - bigf - midf).toInt(), static_cast<int>(roundf(expecMidf - expecBigf - expecMidf)));
 }
 
 TEST_F(FixedTest, SubractionFloatOperators) {
@@ -48,10 +48,10 @@ TEST_F(FixedTest, SubractionFloatOperators) {
 
 TEST_F(FixedTest, MultiplicationIntOperators) {
   EXPECT_EQ((mid * big).toInt(), expecMid * expecBig);
-  EXPECT_EQ((mid * bigf).toInt(), static_cast<int>(round(static_cast<float>(expecMid) * expecBigf)));
-  EXPECT_EQ((midf * bigf).toInt(), static_cast<int>(round(expecMidf * expecBigf)));
+  EXPECT_EQ((mid * bigf).toInt(), static_cast<int>(roundf(static_cast<float>(expecMid) * expecBigf)));
+  EXPECT_EQ((midf * bigf).toInt(), static_cast<int>(roundf(expecMidf * expecBigf)));
   EXPECT_EQ((mid * big * mid).toInt(), expecMid * expecBig * expecMid);
-  EXPECT_EQ((midf * bigf * midf).toInt(), static_cast<int>(round(expecMidf * expecBigf * expecMidf)));
+  EXPECT_EQ((midf * bigf * midf).toInt(), static_cast<int>(roundf(expecMidf * expecBigf * expecMidf)));
 }
 
 TEST_F(FixedTest, MultiplicationFloatOperators) {
@@ -64,10 +64,10 @@ TEST_F(FixedTest, MultiplicationFloatOperators) {
 
 TEST_F(FixedTest, DivisionIntOperators) {
   EXPECT_EQ((mid / big).toInt(), expecMid / expecBig);
-  EXPECT_EQ((mid / bigf).toInt(), static_cast<int>(round(static_cast<float>(expecMid) / expecBigf)));
-  EXPECT_EQ((midf / bigf).toInt(), static_cast<int>(round(expecMidf / expecBigf)));
+  EXPECT_EQ((mid / bigf).toInt(), static_cast<int>(roundf(static_cast<float>(expecMid) / expecBigf)));
+  EXPECT_EQ((midf / bigf).toInt(), static_cast<int>(roundf(expecMidf / expecBigf)));
   EXPECT_EQ((mid / big / mid).toInt(), expecMid / expecBig / expecMid);
-  EXPECT_EQ((midf / bigf / midf).toInt(), static_cast<int>(round(expecMidf / expecBigf / expecMidf)));
+  EXPECT_EQ((midf / bigf / midf).toInt(), static_cast<int>(roundf(expecMidf / expecBigf / expecMidf)));
 }
 
 TEST_F(FixedTest, DivisionFloatOperators) {
