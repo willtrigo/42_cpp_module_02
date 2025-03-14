@@ -6,7 +6,7 @@
 #    By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/14 16:22:14 by dande-je          #+#    #+#              #
-#    Updated: 2025/03/14 16:39:18 by dande-je         ###   ########.fr        #
+#    Updated: 2025/03/14 17:58:35 by dande-je         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS_DIR                        := src/
 SRCS_MAIN_DIR                   := $(SRCS_DIR)main/
 SRCS_CORE_DIR                   := $(SRCS_DIR)core/
 SRCS_FIXED_DIR                  := $(SRCS_CORE_DIR)fixed/
+SRCS_POINT_DIR                  := $(SRCS_CORE_DIR)point/
 INCS                            := src/
 BIN_DIR                         := bin/
 BUILD_DIR                       := build/
@@ -71,6 +72,9 @@ SRCS_FILES                      += $(addprefix $(SRCS_MAIN_DIR), main.cpp)
 SRCS_FILES                      += $(addprefix $(SRCS_FIXED_DIR), FixedArithmetic.cpp \
 								   FixedConstructors.cpp \
 								   FixedUtility.cpp)
+SRCS_FILES                      += $(addprefix $(SRCS_POINT_DIR), PointConstructor.cpp \
+								   PointUtility.cpp \
+								   bsp.cpp)
 
 OBJS                            += $(SRCS_FILES:%.cpp=$(BUILD_DIR)%.o)
 
