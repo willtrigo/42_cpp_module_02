@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:06:43 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/13 00:05:05 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/14 00:03:24 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@ TEST_F(FixedTest, DefaultConstructor) {
 }
 
 TEST_F(FixedTest, IntConstructor) {
-  Fixed c(42);
-  EXPECT_EQ(c.getRawBits(), 42 << 8);
+  EXPECT_EQ(big.getRawBits(), expecBig << 8);
 }
 
 TEST_F(FixedTest, FloatConstructor) {
-  Fixed c(3.14f);
-  EXPECT_NEAR(c.toFloat(), 3.14f, 0.01f);
+  EXPECT_NEAR(bigf.toFloat(), expecBigf, absError);
 }
 
 TEST_F(FixedTest, CopyConstructor) {

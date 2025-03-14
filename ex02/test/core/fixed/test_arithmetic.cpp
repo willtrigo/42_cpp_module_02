@@ -6,76 +6,149 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:02:18 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/13 00:56:44 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/14 01:32:03 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/fixed/test_fixture.hpp"
 #include "gtest/gtest.h"
+#include <cmath>
 
-TEST_F(FixedTest, AdditionOperators) {
-  EXPECT_EQ((small + big).toInt(), 52);
-  EXPECT_EQ((small + bigf).toInt(), 52);
-  EXPECT_NEAR((small + bigf).toFloat(), 52.4219F, 0.01F);
-  EXPECT_EQ((small + big + small).toInt(), 62);
+TEST_F(FixedTest, AdditionIntOperators) {
+  EXPECT_EQ((mid + big).toInt(), expecMid + expecBig);
+  EXPECT_EQ((mid + bigf).toInt(), static_cast<int>(round(static_cast<float>(expecMid) + expecBigf)));
+  EXPECT_EQ((midf + bigf).toInt(), static_cast<int>(round(expecMidf + expecBigf)));
+  EXPECT_EQ((mid + big + mid).toInt(), expecMid + expecBig + expecMid);
+  EXPECT_EQ((midf + bigf + midf).toInt(), static_cast<int>(round(expecMidf + expecBigf + expecMidf)));
 }
 
-TEST_F(FixedTest, ArithmeticOperators) {
-  EXPECT_EQ((big - small).toInt(), 32);
-  EXPECT_EQ((small * big).toInt(), 420);
-  EXPECT_EQ((big / small).toInt(), 4);
+TEST_F(FixedTest, AdditionFloatOperators) {
+  EXPECT_NEAR((mid + big).toFloat(), static_cast<float>(expecMid + expecBig), absError);
+  EXPECT_NEAR((mid + bigf).toFloat(), static_cast<float>(expecMid) + expecBigf, absError);
+  EXPECT_NEAR((midf + bigf).toFloat(), expecMidf + expecBigf, absError);
+  EXPECT_NEAR((mid + big + mid).toFloat(), static_cast<float>(expecMid + expecBig + expecMid), absError);
+  EXPECT_NEAR((midf + bigf + midf).toFloat(), expecMidf + expecBigf + expecMidf, absError);
+}
+
+TEST_F(FixedTest, SubtractionIntOperators) {
+  EXPECT_EQ((mid - big).toInt(), expecMid - expecBig);
+  EXPECT_EQ((mid - bigf).toInt(), static_cast<int>(round(static_cast<float>(expecMid) - expecBigf)));
+  EXPECT_EQ((midf - bigf).toInt(), static_cast<int>(round(expecMidf - expecBigf)));
+  EXPECT_EQ((mid - big - mid).toInt(), expecMid - expecBig - expecMid);
+  EXPECT_EQ((midf - bigf - midf).toInt(), static_cast<int>(round(expecMidf - expecBigf - expecMidf)));
+}
+
+TEST_F(FixedTest, SubractionFloatOperators) {
+  EXPECT_NEAR((mid - big).toFloat(), static_cast<float>(expecMid - expecBig), absError);
+  EXPECT_NEAR((mid - bigf).toFloat(), static_cast<float>(expecMid) - expecBigf, absError);
+  EXPECT_NEAR((midf - bigf).toFloat(), expecMidf - expecBigf, absError);
+  EXPECT_NEAR((mid - big - mid).toFloat(), static_cast<float>(expecMid - expecBig - expecMid), absError);
+  EXPECT_NEAR((midf - bigf - midf).toFloat(), expecMidf - expecBigf - expecMidf, absError);
+}
+
+TEST_F(FixedTest, MultiplicationIntOperators) {
+  EXPECT_EQ((mid * big).toInt(), expecMid * expecBig);
+  EXPECT_EQ((mid * bigf).toInt(), static_cast<int>(round(static_cast<float>(expecMid) * expecBigf)));
+  EXPECT_EQ((midf * bigf).toInt(), static_cast<int>(round(expecMidf * expecBigf)));
+  EXPECT_EQ((mid * big * mid).toInt(), expecMid * expecBig * expecMid);
+  EXPECT_EQ((midf * bigf * midf).toInt(), static_cast<int>(round(expecMidf * expecBigf * expecMidf)));
+}
+
+TEST_F(FixedTest, MultiplicationFloatOperators) {
+  EXPECT_NEAR((mid * big).toFloat(), static_cast<float>(expecMid * expecBig), absError);
+  EXPECT_NEAR((mid * bigf).toFloat(), static_cast<float>(expecMid) * expecBigf, absError);
+  EXPECT_NEAR((midf * bigf).toFloat(), expecMidf * expecBigf, absError);
+  EXPECT_NEAR((mid * big * mid).toFloat(), static_cast<float>(expecMid * expecBig * expecMid), absError);
+  EXPECT_NEAR((midf * bigf * midf).toFloat(), expecMidf * expecBigf * expecMidf, absError);
+}
+
+TEST_F(FixedTest, DivisionIntOperators) {
+  EXPECT_EQ((mid / big).toInt(), expecMid / expecBig);
+  EXPECT_EQ((mid / bigf).toInt(), static_cast<int>(round(static_cast<float>(expecMid) / expecBigf)));
+  EXPECT_EQ((midf / bigf).toInt(), static_cast<int>(round(expecMidf / expecBigf)));
+  EXPECT_EQ((mid / big / mid).toInt(), expecMid / expecBig / expecMid);
+  EXPECT_EQ((midf / bigf / midf).toInt(), static_cast<int>(round(expecMidf / expecBigf / expecMidf)));
+}
+
+TEST_F(FixedTest, DivisionFloatOperators) {
+  EXPECT_NEAR((mid / big).toFloat(), static_cast<float>(expecMid) / expecBig, absError);
+  EXPECT_NEAR((mid / bigf).toFloat(), static_cast<float>(expecMid) / expecBigf, absError);
+  EXPECT_NEAR((midf / bigf).toFloat(), expecMidf / expecBigf, absError);
+  EXPECT_NEAR((mid / big / mid).toFloat(), static_cast<float>(expecMid) / expecBig / expecMid, absError);
+  EXPECT_NEAR((midf / bigf / midf).toFloat(), expecMidf / expecBigf / expecMidf, absError);
+}
+
+TEST_F(FixedTest, DivisionByZeroOperators) {
+  EXPECT_EQ((big / zero).toInt(), expecZero);
+  EXPECT_EQ((big / zero).toFloat(), expecZero);
 }
 
 TEST_F(FixedTest, LessThanOperators) {
-  EXPECT_TRUE(small < big);
-  EXPECT_FALSE(big < small);
+  EXPECT_TRUE(mid < big);
+  EXPECT_FALSE(big < mid);
   EXPECT_FALSE(big < big);
 }
 
 TEST_F(FixedTest, GreaterThanOperators) {
-  EXPECT_TRUE(big > small);
-  EXPECT_FALSE(small > big);
+  EXPECT_TRUE(big > mid);
+  EXPECT_FALSE(mid > big);
   EXPECT_FALSE(big > big);
 }
 
 TEST_F(FixedTest, LessOrEqualOperators) {
-  EXPECT_TRUE(small <= big);
-  EXPECT_FALSE(big <= small);
+  EXPECT_TRUE(mid <= big);
+  EXPECT_FALSE(big <= mid);
   EXPECT_TRUE(big <= big);
 }
 
 TEST_F(FixedTest, GreaterOrEqualOperators) {
-  EXPECT_TRUE(big >= small);
-  EXPECT_FALSE(small >= big);
+  EXPECT_TRUE(big >= mid);
+  EXPECT_FALSE(mid >= big);
   EXPECT_TRUE(big >= big);
 }
 
 TEST_F(FixedTest, EqualityOperators) {
   EXPECT_TRUE(big == big);
-  EXPECT_FALSE(small == big);
+  EXPECT_FALSE(mid == big);
 }
 
 TEST_F(FixedTest, InequalityOperators) {
-  EXPECT_TRUE(small != big);
+  EXPECT_TRUE(mid != big);
   EXPECT_FALSE(big != big);
 }
 
 TEST_F(FixedTest, PreIncrementOperators) {
-  EXPECT_EQ((++small).toInt(), 11);
-  EXPECT_EQ(small.toInt(), 11);
+  float expecValue = expecSmall;
+  EXPECT_NEAR((++small).toFloat(), expecValue + epsilon, absError);
+  EXPECT_NEAR(small.toFloat(), expecValue, absError);
+  expecValue = expecMid;
+  EXPECT_NEAR((++mid).toFloat(), expecValue + epsilon, absError);
+  EXPECT_NEAR(mid.toFloat(), expecValue, absError);
 }
 
 TEST_F(FixedTest, PostIncrementOperators) {
-  EXPECT_EQ((small++).toInt(), 10);
-  EXPECT_EQ(small.toInt(), 11);
+  float expecValue = expecSmall;
+  EXPECT_NEAR((small++).toFloat(), expecValue, absError);
+  EXPECT_NEAR(small.toFloat(), expecValue + epsilon, absError);
+  expecValue = expecMid;
+  EXPECT_NEAR((mid++).toFloat(), expecValue, absError);
+  EXPECT_NEAR(mid.toFloat(), expecValue + epsilon, absError);
 }
 
 TEST_F(FixedTest, PreDecrementOperators) {
-  EXPECT_EQ((--small).toInt(), 9);
-  EXPECT_EQ(small.toInt(), 9);
+  float expecValue = expecSmall;
+  EXPECT_NEAR((small--).toFloat(), expecValue, absError);
+  EXPECT_NEAR(small.toFloat(), expecValue - epsilon, absError);
+  expecValue = expecMid;
+  EXPECT_NEAR((mid--).toFloat(), expecValue, absError);
+  EXPECT_NEAR(mid.toFloat(), expecValue - epsilon, absError);
 }
 
 TEST_F(FixedTest, PostDecrementOperators) {
-  EXPECT_EQ((small--).toInt(), 10);
-  EXPECT_EQ(small.toInt(), 9);
+  float expecValue = expecSmall;
+  EXPECT_NEAR((--small).toFloat(), expecValue - epsilon, absError);
+  EXPECT_NEAR(small.toFloat(), expecValue, absError);
+  expecValue = expecMid;
+  EXPECT_NEAR((--mid).toFloat(), expecValue - epsilon, absError);
+  EXPECT_NEAR(mid.toFloat(), expecValue, absError);
 }
