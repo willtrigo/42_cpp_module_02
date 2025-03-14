@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:23:57 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/14 18:22:50 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:57:11 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main() {
   Point c(0, -10);
 
   Point point1(-1, -1);
-  Point point2(-5, -5);
+  Point point2(-4, -4);
   Point point3(10, 10);
   Point point4(0, 0);
   Point point5(5, 0);
