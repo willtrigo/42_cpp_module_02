@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:44:16 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/14 18:03:11 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/14 22:07:44 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ class Point {
   const Fixed& getX() const;
   const Fixed& getY() const;
 
-  friend bool bsp(Point const a, Point const b, Point const c, Point const point);
-
  private:
   const Fixed m_x;
   const Fixed m_y;
 };
+
+bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif // POINT_HPP
