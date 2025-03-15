@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:23:57 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/14 18:57:11 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/14 22:11:07 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int main() {
   Point point5(5, 0);
 
   std::cout << "Point1 is inside the triangle: " 
-            << (bsp(a, b, c, point1) ? "inside" : "outside or in an edge or a vertex") << std::endl;
+            << (bsp(a, b, c, point1) ? "inside" : "outside or in an edge or in a vertex") << std::endl;
   std::cout << "Point2 is inside the triangle: " 
-            << (bsp(a, b, c, point2) ? "inside" : "outside or in an edge or a vertex") << std::endl;
+            << (bsp(a, b, c, point2) ? "inside" : "outside or in an edge or in a vertex") << std::endl;
   std::cout << "Point3 is inside the triangle: " 
-            << (bsp(a, b, c, point3) ? "inside" : "outside or in an edge or a vertex") << std::endl;
+            << (bsp(a, b, c, point3) ? "inside" : "outside or in an edge or in a vertex") << std::endl;
   std::cout << "Point4 is inside the triangle: " 
-            << (bsp(a, b, c, point4) ? "inside" : "outside or in an edge or a vertex") << std::endl;
+            << (bsp(a, b, c, point4) ? "inside" : "outside or in an edge or in a vertex") << std::endl;
   std::cout << "Point5 is inside the triangle: " 
-            << (bsp(a, b, c, point5) ? "inside" : "outside or in an edge or a vertex") << std::endl;
+            << (bsp(a, b, c, point5) ? "inside" : "outside or in an edge or in a vertex") << std::endl;
   return EXIT_SUCCESS;
 }
