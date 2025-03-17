@@ -6,7 +6,7 @@
 #    By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/14 16:22:14 by dande-je          #+#    #+#              #
-#    Updated: 2025/03/14 17:58:35 by dande-je         ###   ########.fr        #
+#    Updated: 2025/03/17 02:58:33 by dande-je         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,10 +69,10 @@ NAME_OUTPUT                     = fixed
 NAME                            = $(BIN_DIR)$(NAME_OUTPUT)
 
 SRCS_FILES                      += $(addprefix $(SRCS_MAIN_DIR), main.cpp)
-SRCS_FILES                      += $(addprefix $(SRCS_FIXED_DIR), FixedArithmetic.cpp \
-								   FixedConstructors.cpp \
+SRCS_FILES                      += $(addprefix $(SRCS_FIXED_DIR), Fixed.cpp \
+								   FixedArithmetic.cpp \
 								   FixedUtility.cpp)
-SRCS_FILES                      += $(addprefix $(SRCS_POINT_DIR), PointConstructor.cpp \
+SRCS_FILES                      += $(addprefix $(SRCS_POINT_DIR), Point.cpp \
 								   PointUtility.cpp \
 								   bsp.cpp)
 
