@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 17:50:54 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/09 19:27:06 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/17 01:59:57 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ class Fixed {
 
   int m_value;
   const TerminalColor& m_color;
-  ColorCode m_bgColor;
-  ColorCode m_strColor;
+  BgColor m_bgColor;
+  StrColor m_strColor;
+
+  void log(const std::string& str) const;
 };
 
 #endif // FIXED_HPP
