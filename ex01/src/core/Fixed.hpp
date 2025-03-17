@@ -6,7 +6,7 @@
 /*   By: dande-je <dande-je@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 21:49:22 by dande-je          #+#    #+#             */
-/*   Updated: 2025/03/14 20:33:35 by dande-je         ###   ########.fr       */
+/*   Updated: 2025/03/17 02:28:44 by dande-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ class Fixed {
 
   int m_value;
   const TerminalColor& m_color;
-  ColorCode m_strColor;
-  ColorCode m_bgColor;
+  StrColor m_strColor;
+  BgColor m_bgColor;
+
+  void log(const std::string& str) const;
 };
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
